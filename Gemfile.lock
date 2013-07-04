@@ -48,6 +48,7 @@ GEM
     excon (0.25.1)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    friendly_id (4.0.9)
     haml (4.0.3)
       tilt
     heroku (2.39.4)
@@ -148,6 +149,7 @@ PLATFORMS
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
   devise
+  friendly_id (~> 4.0.9)
   haml
   heroku
   jquery-rails

@@ -26,6 +26,7 @@ gem 'haml'
 gem 'devise'
 gem 'heroku'
 gem 'quiet_assets'
+gem "friendly_id", "~> 4.0.9"
 #gem 'rails_admin'
 #gem 'cancan'
 #gem 'dynamic_form'

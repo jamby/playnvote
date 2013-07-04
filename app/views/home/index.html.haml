@@ -1,2 +1,9 @@
 %p
   This is the index page!
+  
+- if user_signed_in?
+  %p
+    You are currently logged in.
+- else
+  %p
+    You are not logged in.
