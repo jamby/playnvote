@@ -1,0 +1,13 @@
+- flash.each do |key, value|
+  .notifications.top-center
+    %div{class: "alert alert-#{key} in fade"}
+      %button.close{"data-dismiss" => "alert", type: "button"} &times;
+      -if value.is_a?(String)
+        = value
+      -else
+        -if value.nil?
+          = devise_error_messages
+        -else
+          - value.each do |msg|
+            %li
+              = msg

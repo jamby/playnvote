@@ -7,7 +7,7 @@
     = csrf_meta_tags
   %body
     / = render 'layouts/header'
-    / #flash_messages
-    /   = render 'layouts/flash_messages'
+    #flash_messages
+      = render 'layouts/flash_messages'
     .container
       = yield

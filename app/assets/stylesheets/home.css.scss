@@ -1,3 +1,15 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// Bootstrap alert modifications.
+
+.alert-alert {
+  background-color: #fc5b5e;
+  border-color: #fc4c6d;
+}
+
+.alert-notice {
+  background-color: #5bb75b;
+  border-color: #5cad4c;
+}
