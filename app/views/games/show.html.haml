@@ -5,3 +5,20 @@
 
 %p
   = @game.platform.join(" | ")
+  
+%br
+%br
+
+%h4 Related Games
+- @relatedGames.each do |relatedGame|
+  %div
+    - if Game.find(relatedGame.game1_id).title == @game.title
+      = Game.find(relatedGame.game2_id).title
+    - else
+      = Game.find(relatedGame.game1_id).title
+    Upvotes: #{relatedGame.upvotes.size} |
+    Downvotes: #{relatedGame.downvotes.size}
+    %span.btn.btn-success.upvote{user_id: current_user.id, game1_id: relatedGame.game1_id, game2_id: relatedGame.game2_id}
+      Upvote
+    %span.btn.btn-danger.downvote{user_id: current_user.id, game1_id: relatedGame.game1_id, game2_id: relatedGame.game2_id}
+      Downvote

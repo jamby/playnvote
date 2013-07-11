@@ -1,0 +1,2 @@
+module RelatedGamesHelper
+end

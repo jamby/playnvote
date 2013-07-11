@@ -4,8 +4,13 @@
 - if user_signed_in?
   %p
     You are currently logged in.
-  %p
-    = link_to "Sign out", destroy_user_session_path, method: :delete
 - else
   %p
     You are not logged in.
+    
+%br
+%br
+
+- @games.each do |game|
+  %p
+    = link_to game.title, game

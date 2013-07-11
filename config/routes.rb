@@ -4,6 +4,12 @@ Playnvote::Application.routes.draw do
   
   resources :users
   resources :games
+  resources :related_games do
+    collection do
+      post :upvote
+      post :downvote
+    end
+  end
 
   root to: 'home#index'
   # The priority is based upon order of creation:
