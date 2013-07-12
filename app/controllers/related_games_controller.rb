@@ -1,7 +1,7 @@
 class RelatedGamesController < ApplicationController
   respond_to :json
 
-  def upvote# in link... user: current_user, game1: game, game2: game compared
+  def upvote
     @user = User.find(params[:user_id])
     @game1 = Game.find(params[:game1_id])
     @game2 = Game.find(params[:game2_id])
@@ -13,9 +13,8 @@ class RelatedGamesController < ApplicationController
     else
       @user.up_votes @relatedGame
     end
-    
     respond_to do |format|
-      format.js
+      format.json { render json: { upvotes: @relatedGame.upvotes.size, downvotes: @relatedGame.downvotes.size }.to_json }
     end
   end
   
@@ -33,7 +32,7 @@ class RelatedGamesController < ApplicationController
     end
     
     respond_to do |format|
-      format.js
+      format.json { render json: { upvotes: @relatedGame.upvotes.size, downvotes: @relatedGame.downvotes.size }.to_json }
     end
   end
 

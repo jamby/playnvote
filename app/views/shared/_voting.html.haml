@@ -1,0 +1,13 @@
+.voting-info
+  .voting-info-numbers
+    %span.upvote-number Upvotes: #{relatedGame.upvotes.size}
+    %span.downvote-number Downvotes: #{relatedGame.downvotes.size}
+  - if current_user and current_user.voted_up_on? relatedGame
+    %i.icon-arrow-up.icon-large.color-green.clickable.upvote{user_id: "#{ current_user.id if current_user }", game1_id: relatedGame.game1_id, game2_id: relatedGame.game2_id}
+  - else
+    %i.icon-arrow-up.icon-large.clickable.upvote{user_id: "#{ current_user.id if current_user }", game1_id: relatedGame.game1_id, game2_id: relatedGame.game2_id}
+
+  - if current_user and current_user.voted_down_on? relatedGame
+    %i.icon-arrow-down.icon-large.color-red.clickable.downvote{user_id: "#{ current_user.id if current_user }", game1_id: relatedGame.game1_id, game2_id: relatedGame.game2_id}
+  - else
+    %i.icon-arrow-down.icon-large.clickable.downvote{user_id: "#{ current_user.id if current_user }", game1_id: relatedGame.game1_id, game2_id: relatedGame.game2_id}

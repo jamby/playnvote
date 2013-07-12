@@ -15,3 +15,15 @@
 body {
 	padding-top: 45px;
 }
+
+.color-red {
+	color: #da4f49;
+}
+
+.color-green {
+	color: #5bb75b;
+}
+
+.clickable {
+	cursor: pointer;
+}
