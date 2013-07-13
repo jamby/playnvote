@@ -1,7 +1,6 @@
 $(document).ready( function() {
 	
 	$(".upvote").click(function(event) {
-		$('#form_messages').append("<div></div>").addClass("notifications top-center")
 		user_id = $(this).attr('user_id');
 		game1_id = $(this).attr('game1_id');
 		game2_id = $(this).attr('game2_id');
