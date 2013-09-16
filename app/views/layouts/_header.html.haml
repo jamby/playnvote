@@ -1,14 +1,14 @@
-.navbar.navbar-fixed-top
+%nav.navbar.navbar-default.navbar-fixed-top
   .navbar-inner
     .container
-      %a.brand{href: root_path} Play N' Vote!
+      %a.navbar-brand{href: root_path} Play N' Vote!
       .pull-right
-        %ul.nav
+        %ul.nav.navbar-nav
           %li{class: active_header_link(["home", "index"])}= link_to "Home", root_path
           %li= link_to "Stuff", '#'
           %li= link_to "Stuff 2", '#'
           -if user_signed_in?
             = link_to "Sign out", destroy_user_session_path, class: "btn btn-primary", method: :delete
           -else
-            = link_to "Sign in", new_user_session_path, class: "btn btn-primary"
-            = link_to "Register", new_user_registration_path, class: "btn btn-primary"
+            = link_to "Sign in", new_user_session_path, class: "btn btn-primary navbar-btn"
+            = link_to "Register", new_user_registration_path, class: "btn btn-primary navbar-btn"
