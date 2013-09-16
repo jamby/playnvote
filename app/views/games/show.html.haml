@@ -9,5 +9,12 @@
 %br
 %br
 
+= form_tag compare_search_path, method: 'get', class: "form-inline" do
+  %span Compare to a game that's not shown?
+  = text_field_tag :q, params[:q], class: "typeahead", "data-provide" => "typeahead", autocomplete: "off"
+  = hidden_field_tag :search_game_id, '', class: "search_game_id"
+  = hidden_field_tag :current_game, @game.id
+  = submit_tag "Search", name: nil, class: "btn"
+
 %h4 Related Games
 = render 'related_games/related_game', current_user: current_user

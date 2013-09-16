@@ -1,6 +1,15 @@
 class RelatedGamesController < ApplicationController
   respond_to :json
 
+  def index
+
+  end
+  
+  def show
+    @game1 = Game.find(RelatedGame.find(params[:id]).game1_id)
+    @game2 = Game.find(RelatedGame.find(params[:id]).game2_id)
+  end
+
   def upvote
     if params[:user_id].empty?
       flash.now[:error] = "You need to be logged in!"
