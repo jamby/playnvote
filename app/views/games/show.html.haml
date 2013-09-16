@@ -1,22 +1,23 @@
-%h1
-  = @game.title
-%p
-  Release Date: #{@game.release_date.strftime("%B %-d, %Y")}
+.container
+  %h1
+    = @game.title
+  %p
+    Release Date: #{@game.release_date.strftime("%B %-d, %Y")}
 
-%p
-  = @game.platform.join(" | ")
+  %p
+    = @game.platform.join(" | ")
   
-%br
-%br
+  %br
+  %br
 
-= form_tag compare_search_path, method: 'get', class: "form-inline", role: "form" do
-  .form-group
-    %span Compare to a game that's not shown?
-  .form-group
-    = text_field_tag :q, params[:q], class: "typeahead form-control", "data-provide" => "typeahead", autocomplete: "off"
-  = hidden_field_tag :search_game_id, '', class: "search_game_id"
-  = hidden_field_tag :current_game, @game.id
-  = submit_tag "Search", name: nil, class: "btn"
+  = form_tag compare_search_path, method: 'get', class: "form-inline", role: "form" do
+    .form-group
+      %span Compare to a game that's not shown?
+    .form-group
+      = text_field_tag :q, params[:q], class: "typeahead form-control", "data-provide" => "typeahead", autocomplete: "off"
+    = hidden_field_tag :search_game_id, '', class: "search_game_id"
+    = hidden_field_tag :current_game, @game.id
+    = submit_tag "Search", name: nil, class: "btn"
 
-%h4 Related Games
-= render 'related_games/related_game', current_user: current_user
+  %h4 Related Games
+  = render 'related_games/related_game', current_user: current_user

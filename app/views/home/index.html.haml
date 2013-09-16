@@ -1,18 +1,25 @@
-%p
-  This is the index page!
+.jumbotron
+  .container
+    %h1.text-center Play, find, and compare games!
+    %br
+    .lead Check for any game and then compare it to any other game!
+    .lead See what your fellow gamers have to say about similar or not-so similar games!
+.container
+  %p
+    This is the index page!
   
-- if user_signed_in?
-  %p
-    You are currently logged in.
-- else
-  %p
-    You are not logged in.
+  - if user_signed_in?
+    %p
+      You are currently logged in.
+  - else
+    %p
+      You are not logged in.
     
-%br
-%br
-%br
-%br
+  %br
+  %br
+  %br
+  %br
 
-- @games.each do |game|
-  %p
-    = link_to game.title, game
+  - @games.each do |game|
+    %p
+      = link_to game.title, game
