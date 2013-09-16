@@ -1,8 +1,19 @@
-%p
-  This is the related game page.
+.col-md-5
+  %h2.text-center
+    = @game1.title
+  %p
+    Release Date: #{@game1.release_date.strftime("%B %-d, %Y")}
+  %p
+    = @game1.platform.join(" | ")
+    
+.col-md-2
+  = render 'shared/voting', relatedGame: @relatedGame
   
-%p
-  = @game1.title
   
-%p
-  = @game2.title
+.col-md-5
+  %h2.text-center
+    = @game2.title
+  %p
+    Release Date: #{@game2.release_date.strftime("%B %-d, %Y")}
+  %p
+    = @game2.platform.join(" | ")

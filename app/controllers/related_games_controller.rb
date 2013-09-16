@@ -6,6 +6,7 @@ class RelatedGamesController < ApplicationController
   end
   
   def show
+    @relatedGame = RelatedGame.find(params[:id])
     @game1 = Game.find(RelatedGame.find(params[:id]).game1_id)
     @game2 = Game.find(RelatedGame.find(params[:id]).game2_id)
   end
