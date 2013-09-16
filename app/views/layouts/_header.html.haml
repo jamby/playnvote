@@ -8,7 +8,7 @@
           %li= link_to "Stuff", '#'
           %li= link_to "Stuff 2", '#'
           -if user_signed_in?
-            = link_to "Sign out", destroy_user_session_path, class: "btn btn-primary", method: :delete
+            = link_to "Sign out", destroy_user_session_path, class: "btn btn-primary navbar-btn", method: :delete
           -else
             = link_to "Sign in", new_user_session_path, class: "btn btn-primary navbar-btn"
             = link_to "Register", new_user_registration_path, class: "btn btn-primary navbar-btn"
