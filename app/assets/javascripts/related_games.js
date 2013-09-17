@@ -6,7 +6,7 @@ $(document).ready( function() {
 		game2_id = $(this).attr('game2_id');
 		_this = $(this);
 		
-		$.post('/related_games/upvote', {user_id: user_id, game1_id: game1_id, game2_id: game2_id},
+		$.post('/compare/upvote', {user_id: user_id, game1_id: game1_id, game2_id: game2_id},
 			function(data) {
 				// update number
 				if (user_id != "") {
@@ -26,7 +26,7 @@ $(document).ready( function() {
 		game2_id = $(this).attr('game2_id');
 		_this = $(this);
 		
-		$.post('/related_games/downvote', {user_id: user_id, game1_id: game1_id, game2_id: game2_id},
+		$.post('/compare/downvote', {user_id: user_id, game1_id: game1_id, game2_id: game2_id},
 			function(data) {
 				// update number
 				if (user_id != "") {
