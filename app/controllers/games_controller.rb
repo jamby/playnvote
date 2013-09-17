@@ -30,6 +30,16 @@ class GamesController < ApplicationController
     end
   end
   
+  def search_games
+    if !params[:q_id].blank?
+      @find_game = Game.find(params[:q_id])
+      redirect_to game_path(@find_game)
+    else
+      flash[:error] = "Game does not exist."
+      redirect_to root_path
+    end
+  end
+  
   def search_related
     @current_game = Game.find(params[:current_game])
     @search_game = Game.find(params[:search_game_id])
