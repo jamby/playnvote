@@ -4,7 +4,9 @@ Playnvote::Application.routes.draw do
   
   resources :users
   resources :games
-  get "compare_search" => 'games#search_related', as: 'compare_search'
+  post "compare_search" => 'games#search_related', as: 'compare_search'
+  post "search" => 'application#search_games', as: 'search'
+
   resources :related_games, path: '/compare' do
     collection do
       post :upvote

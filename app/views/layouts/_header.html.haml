@@ -7,6 +7,14 @@
           %li{class: active_header_link(["home", "index"])}= link_to "Home", root_path
           %li= link_to "Stuff", '#'
           %li= link_to "Stuff 2", '#'
+          %li.dropdown
+            = link_to '<i class="icon-search"></i>'.html_safe, '#', {class: "dropdown-toggle", "data-toggle" => "dropdown"}
+            %ul.dropdown-menu.pull-right{style: "min-width: 260px;", "aria-labelledby" => "dLabel", role: "menu"}
+              = form_tag search_path, method: :post, class: "form-inline header-search", role: "form" do
+                .form-group
+                  = text_field_tag :q, params[:q], class: "search-typeahead form-control", "data-provide" => "typeahead", autocomplete: "off"
+                  = hidden_field_tag :q_id, '', class: "q_id"
+                = submit_tag "Search", name: nil, class: "btn btn-inverse"
           -if user_signed_in?
             = link_to "Sign out", destroy_user_session_path, class: "btn btn-primary navbar-btn", method: :delete
           -else

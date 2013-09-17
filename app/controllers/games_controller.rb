@@ -1,6 +1,14 @@
 class GamesController < ApplicationController
   # respond :html, :json
   
+  def index
+    @games = Game.all
+    respond_to do |format|
+      format.html
+      format.json { render json: { games: @games } }
+    end
+  end
+  
   def new
     @game = Game.new
   end

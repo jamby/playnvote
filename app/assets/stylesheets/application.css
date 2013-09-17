@@ -27,3 +27,8 @@ body {
 .clickable {
 	cursor: pointer;
 }
+
+.header-search {
+	margin: 0;
+	padding: 6px 8px 6px 8px;
+}
