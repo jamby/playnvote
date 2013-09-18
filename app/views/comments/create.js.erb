@@ -1,0 +1,5 @@
+$('#comments').append("<%= escape_javascript(render partial: 'comment', locals: { comment: @comment } ) %>");
+
+if ("<%= @comment.body %>") {
+	$("#comment_body").val('')
+}
