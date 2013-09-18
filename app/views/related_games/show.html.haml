@@ -30,7 +30,7 @@
     .col-md-5
       - if user_signed_in?
         %h5 Have something to say?
-        = form_for([@relatedGame, @new_comment]) do |f|
+        = form_for([@relatedGame, @new_comment], remote: true) do |f|
           .form-group
             = f.text_area :body, class: "form-control", rows: "3"
             = f.hidden_field :user_id, value: current_user.id
@@ -39,12 +39,6 @@
             
   .row
     .col-md-12
-      - if !@comments.empty?
-        = render partial: 'comments/comment', collection: @relatedGame.root_comments, as: :comment
-        / - @comments.each do |comment|
-        /   %p
-        /     User:
-        /     %strong
-        /       = User.find(comment.user_id).username
-        /   %p
-        /     = comment.body
+      #comments
+        - if !@comments.empty?
+          = render partial: 'comments/comment', collection: @relatedGame.root_comments, as: :comment

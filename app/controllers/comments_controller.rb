@@ -3,7 +3,9 @@ class CommentsController < ApplicationController
     @relatedGame = RelatedGame.find(params[:related_game_id])
     @comment = Comment.build_from(@relatedGame, current_user.id, params[:comment][:body])
     if @comment.save
-      redirect_to related_game_path(@relatedGame)
+      respond_to do |format|
+        format.js
+      end
     else
       flash.now[:error] = "Comment was not submitted."
       redirect_to root_path
