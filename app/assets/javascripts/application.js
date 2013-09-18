@@ -13,3 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+window.setTimeout(function() {
+	$(".alert").alert('close');
+}, 2400);
