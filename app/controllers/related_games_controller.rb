@@ -9,6 +9,8 @@ class RelatedGamesController < ApplicationController
     @relatedGame = RelatedGame.find(params[:id])
     @game1 = Game.find(RelatedGame.find(params[:id]).game1_id)
     @game2 = Game.find(RelatedGame.find(params[:id]).game2_id)
+    @comments = @relatedGame.comment_threads
+    @new_comment = Comment.build_from(@relatedGame, current_user.id, "")
   end
 
   def upvote

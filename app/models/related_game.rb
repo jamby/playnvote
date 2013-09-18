@@ -5,4 +5,5 @@ class RelatedGame < ActiveRecord::Base
   belongs_to :game2, class_name: "Game", foreign_key: "game2_id"
   
   acts_as_votable
+  acts_as_commentable
 end

@@ -1,5 +1,7 @@
 Playnvote::Application.routes.draw do
 
+  # get "comments/create"
+
   devise_for :users
   
   resources :users
@@ -12,6 +14,7 @@ Playnvote::Application.routes.draw do
       post :upvote
       post :downvote
     end
+    resources :comments
   end
 
   root to: 'home#index'

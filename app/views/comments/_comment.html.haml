@@ -1,0 +1,10 @@
+- if comment.id != nil
+  %p
+    User:
+    %strong
+      = User.find(comment.user_id).username
+  %p
+    = comment.body
+  - if comment.has_children?
+    %div{style: "margin-left: 10px;"}
+      = render partial: 'comments/comment', collection: comment.children, as: :comment
