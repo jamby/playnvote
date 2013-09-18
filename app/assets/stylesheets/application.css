@@ -32,3 +32,19 @@ body {
 	margin: 0;
 	padding: 6px 8px 6px 8px;
 }
+
+.comment {
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	border: 1px solid #5e5e5e;
+	padding: 5px;
+	font-size: 12px;
+}
+
+.comment-options {
+	font-size: 9px;
+	margin-top: -5px;
+	padding-right: 7px;
+	padding-left: 7px;
+}

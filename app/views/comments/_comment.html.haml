@@ -1,10 +1,16 @@
 - if comment.id != nil
-  %p
-    User:
-    %strong
-      = User.find(comment.user_id).username
-  :markdown
-    #{comment.body}
-  - if comment.has_children?
-    %div{style: "margin-left: 10px;"}
-      = render partial: 'comments/comment', collection: comment.children, as: :comment
+  .comment
+    %p
+      %strong
+        = link_to User.find(comment.user_id).username, user_path(User.find(comment.user_id).slug)
+      
+      %span{style: "padding-left: 10px;font-size: 9px;"}= comment.created_at
+    .comment-body
+      :markdown
+        #{comment.body}
+    .comment-options.all{style: "margin-bottom: 10px;"}
+      %span.comment-options delete
+      %span.comment-options reply
+    - if comment.has_children?
+      %div{style: "margin-left: 10px; margin-right: 10px;"}
+        = render partial: 'comments/comment', collection: comment.children, as: :comment
