@@ -10,7 +10,17 @@
         #{comment.body}
     .comment-options{style: "margin-bottom: 10px;"}
       = button_to "delete", related_game_comment_path(comment.commentable_id, comment), method: :delete, remote: true, class: "btn-link", style: "float:left;"
-      = button_to "reply", '#', class: "btn-link", style: "float:left;"
+      %button.btn-link.reply-button{style: "float:left;", comment_id: comment.id} reply
+      %div{style: "clear:both;"}
+    .comment-reply{id: "replyto_#{comment.id}"}
+      .col-md-5
+        = form_for([@relatedGame, Comment.new], remote: true) do |f|
+          .form-group
+            = f.text_area :body, class: "form-control", rows: "3"
+            = f.hidden_field :user_id, value: current_user.id
+            = f.hidden_field :parent_id, value: comment.parent_id
+          .form-group
+            = f.submit "Submit", class: "btn btn-sm"
       %div{style: "clear:both;"}
     - if comment.has_children?
       %div{style: "margin-left: 10px; margin-right: 10px;"}

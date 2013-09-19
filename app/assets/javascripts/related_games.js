@@ -39,4 +39,9 @@ $(document).ready( function() {
 			$(this).toggleClass('color-red');
 		}
 	});
+	
+	$(".reply-button").click(function() {
+		comment_id = $(this).attr('comment_id');
+		$('#replyto_' + comment_id).toggle();
+	});
 })

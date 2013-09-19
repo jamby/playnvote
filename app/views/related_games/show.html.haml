@@ -30,7 +30,7 @@
     .col-md-5
       - if user_signed_in?
         %h5 Have something to say?
-        = form_for([@relatedGame, @new_comment], remote: true) do |f|
+        = form_for([@relatedGame, Comment.new], remote: true) do |f|
           .form-group
             = f.text_area :body, class: "form-control", rows: "3"
             = f.hidden_field :user_id, value: current_user.id
