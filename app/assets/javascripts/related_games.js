@@ -40,8 +40,14 @@ $(document).ready( function() {
 		}
 	});
 	
-	$(".reply-button").click(function() {
+	// $(".reply-button").click(function() {
+	// 	comment_id = $(this).attr('comment_id');
+	// 	console.log(comment_id);
+	// 	$('#replyto_' + comment_id).toggle();
+	// });
+})
+
+$(document).on("click", ".reply-button", function () {
 		comment_id = $(this).attr('comment_id');
 		$('#replyto_' + comment_id).toggle();
-	});
 })

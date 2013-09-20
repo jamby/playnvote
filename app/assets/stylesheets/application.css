@@ -53,3 +53,8 @@ body {
 .comment-reply {
 	display: none;
 }
+
+.reply {
+	margin-left: 10px;
+	margin-right: 10px;
+}

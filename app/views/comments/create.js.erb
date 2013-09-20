@@ -1,5 +1,16 @@
-$('#comments').append("<%= escape_javascript(render partial: 'comment', locals: { comment: @comment } ) %>");
-
-if ("<%= @comment.body %>") {
-	$("#comment_body").val('')
+if ("<%= @comment.parent_id %>") {
+	if ($('.comment_<%= @comment.parent_id %> > .reply').length <= 0) {
+		$("#replyto_<%= @comment.parent_id %>").after("<div class='reply'></div>");
+	}
+	$('.comment_<%= @comment.parent_id %> > .reply').append("<%= escape_javascript(render partial: 'comment', locals: { comment: @comment } ) %>");
+	
+	$(".body_<%= @comment.parent_id %>").val('');
+	$("#replyto_<%= @comment.parent_id %>").toggle();
+}
+else {
+	$('#comments').append("<%= escape_javascript(render partial: 'comment', locals: { comment: @comment } ) %>");
+	
+	if ("<%= @comment.body %>") {
+		$("#comment_body").val('');
+	}
 }

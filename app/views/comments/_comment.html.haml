@@ -14,14 +14,15 @@
       %div{style: "clear:both;"}
     .comment-reply{id: "replyto_#{comment.id}"}
       .col-md-5
-        = form_for([@relatedGame, Comment.new], remote: true) do |f|
-          .form-group
-            = f.text_area :body, class: "form-control", rows: "3"
-            = f.hidden_field :user_id, value: current_user.id
-            = f.hidden_field :parent_id, value: comment.parent_id
-          .form-group
-            = f.submit "Submit", class: "btn btn-sm"
+        - if user_signed_in?
+          = form_for([@relatedGame, Comment.new], remote: true) do |f|
+            .form-group
+              = f.text_area :body, class: "form-control body_#{comment.id}", rows: "3"
+              = f.hidden_field :user_id, value: current_user.id
+              = f.hidden_field :parent_id, value: comment.id
+            .form-group
+              = f.submit "Submit", class: "btn btn-sm"
       %div{style: "clear:both;"}
     - if comment.has_children?
-      %div{style: "margin-left: 10px; margin-right: 10px;"}
+      .reply
         = render partial: 'comments/comment', collection: comment.children, as: :comment

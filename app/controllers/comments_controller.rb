@@ -2,8 +2,14 @@ class CommentsController < ApplicationController
   def create
     @relatedGame = RelatedGame.find(params[:related_game_id])
     @all_comments = @relatedGame.comment_threads
+    if (params[:comment].has_key?(:parent_id))
+      @parent = Comment.find(params[:comment][:parent_id])
+    end
     @comment = Comment.build_from(@relatedGame, current_user.id, params[:comment][:body])
     if @comment.save
+      if @parent
+        @comment.move_to_child_of(@parent)
+      end
       respond_to do |format|
         format.js
       end
