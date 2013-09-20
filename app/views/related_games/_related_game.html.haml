@@ -1,7 +1,9 @@
 - @relatedGames.each do |relatedGame|
-  %div
-    - if Game.find(relatedGame.game1_id).title == @game.title
-      = Game.find(relatedGame.game2_id).title
-    - else
-      = Game.find(relatedGame.game1_id).title
-    = render 'shared/voting', relatedGame: relatedGame
+  .row
+    .col-md-1
+      = render 'shared/voting', relatedGame: relatedGame
+    .col-md-11
+      - if Game.find(relatedGame.game1_id).title == @game.title
+        = Game.find(relatedGame.game2_id).title
+      - else
+        = Game.find(relatedGame.game1_id).title

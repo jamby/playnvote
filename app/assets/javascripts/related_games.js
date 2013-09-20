@@ -10,12 +10,14 @@ $(document).ready( function() {
 			function(data) {
 				// update number
 				if (user_id != "") {
-					_this.siblings('.voting-info-numbers').html("<span class=\"upvote-number\">Upvotes: " + data.upvotes + " </span><span class=\"downvote-number\">Downvotes: " + data.downvotes + "</span>");
+					_this.siblings('.votes-cumulative').find('div').html(data.upvotes - data.downvotes);
+					_this.siblings('.voting-info-numbers').html("\( <span class=\"color-green upvote-number\">" + data.upvotes + " </span>| <span class=\"color-red downvote-number\">" + data.downvotes + "</span> \)");
 				}
 			});
 		
 		if (user_id != "") {
 			$(this).siblings('.icon-arrow-down').removeClass('color-red');
+			$(this).siblings('.votes-cumulative').find('div').removeClass('color-red').toggleClass('color-green');
 			$(this).toggleClass('color-green');
 		}
 	});
@@ -30,12 +32,14 @@ $(document).ready( function() {
 			function(data) {
 				// update number
 				if (user_id != "") {
-					_this.siblings('.voting-info-numbers').html("<span class=\"upvote-number\">Upvotes: " + data.upvotes + " </span><span class=\"downvote-number\">Downvotes: " + data.downvotes + "</span>");
+					_this.siblings('.votes-cumulative').find('div').html(data.upvotes - data.downvotes);
+					_this.siblings('.voting-info-numbers').html("\( <span class=\"color-green upvote-number\">" + data.upvotes + " </span>| <span class=\"color-red downvote-number\">" + data.downvotes + "</span> \)");
 				}
 			});
 		
 		if (user_id != "") {
 			$(this).siblings('.icon-arrow-up').removeClass('color-green');
+			$(this).siblings('.votes-cumulative').find('div').removeClass('color-green').toggleClass('color-red');
 			$(this).toggleClass('color-red');
 		}
 	});

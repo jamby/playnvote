@@ -9,8 +9,9 @@
       :markdown
         #{comment.body}
     .comment-options{style: "margin-bottom: 10px;"}
-      - if current_user.id == comment.user_id
-        = button_to "delete", related_game_comment_path(comment.commentable_id, comment), method: :delete, remote: true, class: "btn-link", style: "float:left;"
+      - if user_signed_in?
+        - if current_user.id == comment.user_id
+          = button_to "delete", related_game_comment_path(comment.commentable_id, comment), method: :delete, remote: true, class: "btn-link", style: "float:left;"
       %button.btn-link.reply-button{style: "float:left;", comment_id: comment.id} reply
       %div{style: "clear:both;"}
     .comment-reply{id: "replyto_#{comment.id}"}

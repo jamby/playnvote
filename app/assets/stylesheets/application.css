@@ -28,6 +28,10 @@ body {
 	cursor: pointer;
 }
 
+.related-small {
+	width: 50px;
+}
+
 .header-search {
 	margin: 0;
 	padding: 6px 8px 6px 8px;

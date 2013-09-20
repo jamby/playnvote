@@ -1,13 +1,37 @@
-.voting-info
-  .voting-info-numbers
-    %span.upvote-number Upvotes: #{relatedGame.upvotes.size}
-    %span.downvote-number Downvotes: #{relatedGame.downvotes.size}
+%center.voting-info
   - if current_user and current_user.voted_up_on? relatedGame
-    %i.icon-arrow-up.icon-large.color-green.clickable.upvote{user_id: "#{ current_user.id if current_user }", game1_id: relatedGame.game1_id, game2_id: relatedGame.game2_id}
+    - if params[:controller] == 'related_games'
+      %i.icon-arrow-up.icon-2x.color-green.clickable.upvote{user_id: "#{ current_user.id if current_user }", game1_id: relatedGame.game1_id, game2_id: relatedGame.game2_id}
+    - elsif params[:controller] == 'games'
+      %i.icon-arrow-up.icon-large.color-green.clickable.upvote{user_id: "#{ current_user.id if current_user }", game1_id: relatedGame.game1_id, game2_id: relatedGame.game2_id}
   - else
-    %i.icon-arrow-up.icon-large.clickable.upvote{user_id: "#{ current_user.id if current_user }", game1_id: relatedGame.game1_id, game2_id: relatedGame.game2_id}
-
+    - if params[:controller] == 'related_games'
+      %i.icon-arrow-up.icon-2x.clickable.upvote{user_id: "#{ current_user.id if current_user }", game1_id: relatedGame.game1_id, game2_id: relatedGame.game2_id}
+    - elsif params[:controller] == 'games'
+      %i.icon-arrow-up.icon-large.clickable.upvote{user_id: "#{ current_user.id if current_user }", game1_id: relatedGame.game1_id, game2_id: relatedGame.game2_id}
+  %br
+  .votes-cumulative
+    - if current_user and current_user.voted_up_on? relatedGame
+      .color-green= relatedGame.upvotes.size - relatedGame.downvotes.size
+    - elsif current_user and current_user.voted_down_on? relatedGame
+      .color-red= relatedGame.upvotes.size - relatedGame.downvotes.size
+    - elsif current_user
+      %div= relatedGame.upvotes.size - relatedGame.downvotes.size
+    - else
+      %div= relatedGame.upvotes.size - relatedGame.downvotes.size
   - if current_user and current_user.voted_down_on? relatedGame
-    %i.icon-arrow-down.icon-large.color-red.clickable.downvote{user_id: "#{ current_user.id if current_user }", game1_id: relatedGame.game1_id, game2_id: relatedGame.game2_id}
+    - if params[:controller] == 'related_games'
+      %i.icon-arrow-down.icon-2x.color-red.clickable.downvote{user_id: "#{ current_user.id if current_user }", game1_id: relatedGame.game1_id, game2_id: relatedGame.game2_id}
+    - elsif params[:controller] == 'games'
+      %i.icon-arrow-down.icon-large.color-red.clickable.downvote{user_id: "#{ current_user.id if current_user }", game1_id: relatedGame.game1_id, game2_id: relatedGame.game2_id}
   - else
-    %i.icon-arrow-down.icon-large.clickable.downvote{user_id: "#{ current_user.id if current_user }", game1_id: relatedGame.game1_id, game2_id: relatedGame.game2_id}
+    - if params[:controller] == 'related_games'
+      %i.icon-arrow-down.icon-2x.clickable.downvote{user_id: "#{ current_user.id if current_user }", game1_id: relatedGame.game1_id, game2_id: relatedGame.game2_id}
+    - elsif params[:controller] == 'games'
+      %i.icon-arrow-down.icon-large.clickable.downvote{user_id: "#{ current_user.id if current_user }", game1_id: relatedGame.game1_id, game2_id: relatedGame.game2_id}
+  .voting-info-numbers
+    (
+    %span.color-green.upvote-number #{relatedGame.upvotes.size}
+    |
+    %span.color-red.downvote-number #{relatedGame.downvotes.size}
+    )
