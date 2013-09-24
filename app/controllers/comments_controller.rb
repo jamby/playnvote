@@ -11,6 +11,7 @@ class CommentsController < ApplicationController
       if @parent
         @comment.move_to_child_of(@parent)
       end
+      current_user.up_votes @comment
       respond_to do |format|
         format.js
       end

@@ -1,9 +1,15 @@
 - if comment.try(:id) != nil
   .comment{class: "comment_#{comment.id}"}
     .comment-voting
-      %i.icon-arrow-up.icon-large
+      - if current_user and current_user.voted_up_on? comment
+        %i.icon-arrow-up.icon-large.color-green
+      - else
+        %i.icon-arrow-up.icon-large
       %div
-      %i.icon-arrow-down.icon-large
+      - if current_user and current_user.voted_down_on? comment
+        %i.icon-arrow-down.icon-large.color-red
+      - else
+        %i.icon-arrow-down.icon-large
     .comment-info
       %p
         %strong
