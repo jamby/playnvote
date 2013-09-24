@@ -12,7 +12,8 @@
       - if user_signed_in?
         - if current_user.id == comment.user_id
           = button_to "delete", related_game_comment_path(comment.commentable_id, comment), method: :delete, remote: true, class: "btn-link", style: "float:left;"
-      %button.btn-link.reply-button{style: "float:left;", comment_id: comment.id} reply
+        - if ttl_cmts.to_i <= 7
+          %button.btn-link.reply-button{style: "float:left;", comment_id: comment.id} reply
       %div{style: "clear:both;"}
     .comment-reply{id: "replyto_#{comment.id}"}
       .col-md-5
@@ -22,9 +23,10 @@
               = f.text_area :body, class: "form-control body_#{comment.id}", rows: "3"
               = f.hidden_field :user_id, value: current_user.id
               = f.hidden_field :parent_id, value: comment.id
+              = f.hidden_field :ttl_cmts, value: ttl_cmts
             .form-group
               = f.submit "Submit", class: "btn btn-sm"
       %div{style: "clear:both;"}
     - if comment.has_children?
       .reply
-        = render partial: 'comments/comment', collection: comment.children, as: :comment
+        = render partial: 'comments/comment', collection: comment.children, as: :comment, locals: { ttl_cmts: (ttl_cmts + 1) }

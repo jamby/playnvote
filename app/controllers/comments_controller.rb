@@ -2,6 +2,7 @@ class CommentsController < ApplicationController
   def create
     @relatedGame = RelatedGame.find(params[:related_game_id])
     @all_comments = @relatedGame.comment_threads
+    @ttl_cmts = params[:comment][:ttl_cmts]
     if (params[:comment].has_key?(:parent_id))
       @parent = Comment.find(params[:comment][:parent_id])
     end

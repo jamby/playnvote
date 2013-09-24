@@ -41,4 +41,4 @@
     .col-md-12
       #comments
         - if !@comments.empty?
-          = render partial: 'comments/comment', collection: @relatedGame.root_comments, as: :comment
+          = render partial: 'comments/comment', collection: @relatedGame.root_comments, as: :comment, locals: { ttl_cmts: 1 }
