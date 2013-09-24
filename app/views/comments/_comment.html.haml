@@ -1,32 +1,37 @@
 - if comment.try(:id) != nil
   .comment{class: "comment_#{comment.id}"}
-    %p
-      %strong
-        = link_to User.find(comment.user_id).username, user_path(User.find(comment.user_id).slug)
+    .comment-voting
+      %i.icon-arrow-up.icon-large
+      %div
+      %i.icon-arrow-down.icon-large
+    .comment-info
+      %p
+        %strong
+          = link_to User.find(comment.user_id).username, user_path(User.find(comment.user_id).slug)
       
-      %span{style: "padding-left: 10px;font-size: 9px;"}= comment.created_at
-    .comment-body
-      :markdown
-        #{comment.body}
-    .comment-options{style: "margin-bottom: 10px;"}
-      - if user_signed_in?
-        - if current_user.id == comment.user_id
-          = button_to "delete", related_game_comment_path(comment.commentable_id, comment), method: :delete, remote: true, class: "btn-link", style: "float:left;"
-        - if ttl_cmts.to_i <= 7
-          %button.btn-link.reply-button{style: "float:left;", comment_id: comment.id} reply
-      %div{style: "clear:both;"}
-    .comment-reply{id: "replyto_#{comment.id}"}
-      .col-md-5
+        %span{style: "padding-left: 10px;font-size: 9px;"}= comment.created_at
+      .comment-body
+        :markdown
+          #{comment.body}
+      .comment-options{style: "margin-bottom: 10px;"}
         - if user_signed_in?
-          = form_for([@relatedGame, Comment.new], remote: true) do |f|
-            .form-group
-              = f.text_area :body, class: "form-control body_#{comment.id}", rows: "3"
-              = f.hidden_field :user_id, value: current_user.id
-              = f.hidden_field :parent_id, value: comment.id
-              = f.hidden_field :ttl_cmts, value: ttl_cmts
-            .form-group
-              = f.submit "Submit", class: "btn btn-sm"
-      %div{style: "clear:both;"}
-    - if comment.has_children?
-      .reply
-        = render partial: 'comments/comment', collection: comment.children, as: :comment, locals: { ttl_cmts: (ttl_cmts + 1) }
+          - if current_user.id == comment.user_id
+            = button_to "delete", related_game_comment_path(comment.commentable_id, comment), method: :delete, remote: true, class: "btn-link", style: "float:left;padding-top: 1px;"
+          - if ttl_cmts.to_i <= 7
+            %button.btn-link.reply-button{style: "float:left;", comment_id: comment.id} reply
+        %div{style: "clear:both;"}
+      .comment-reply{id: "replyto_#{comment.id}"}
+        .col-md-5
+          - if user_signed_in?
+            = form_for([@relatedGame, Comment.new], remote: true) do |f|
+              .form-group
+                = f.text_area :body, class: "form-control body_#{comment.id}", rows: "3"
+                = f.hidden_field :user_id, value: current_user.id
+                = f.hidden_field :parent_id, value: comment.id
+                = f.hidden_field :ttl_cmts, value: ttl_cmts
+              .form-group
+                = f.submit "Submit", class: "btn btn-sm"
+        %div{style: "clear:both;"}
+      - if comment.has_children?
+        .reply
+          = render partial: 'comments/comment', collection: comment.children, as: :comment, locals: { ttl_cmts: (ttl_cmts + 1) }
