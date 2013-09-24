@@ -1,8 +1,8 @@
 if ("<%= @comment.parent_id %>") {
-	if ($('.comment_<%= @comment.parent_id %> > .reply').length <= 0) {
+	if ($('.comment_<%= @comment.parent_id %> > .comment-info > .reply').length <= 0) {
 		$("#replyto_<%= @comment.parent_id %>").after("<div class='reply'></div>");
 	}
-	$('.comment_<%= @comment.parent_id %> > .reply').append("<%= escape_javascript(render partial: 'comment', locals: { comment: @comment, ttl_cmts: @ttl_cmts } ) %>");
+	$('.comment_<%= @comment.parent_id %> > .comment-info > .reply').append("<%= escape_javascript(render partial: 'comment', locals: { comment: @comment, ttl_cmts: @ttl_cmts } ) %>");
 	
 	$(".body_<%= @comment.parent_id %>").val('');
 	$("#replyto_<%= @comment.parent_id %>").toggle();

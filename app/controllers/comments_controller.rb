@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
     if (params[:comment].has_key?(:parent_id))
       @parent = Comment.find(params[:comment][:parent_id])
     end
-    @comment = Comment.build_from(@relatedGame, current_user.id, params[:comment][:body])
+    @comment = Comment.build_from(@relatedGame, current_user.id, params[:comment][:body].gsub(/\r?\n/, "<br />"))
     if @comment.save
       if @parent
         @comment.move_to_child_of(@parent)
