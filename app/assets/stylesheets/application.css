@@ -48,6 +48,14 @@ body {
 	display: block;
 }
 
+.noncollapsed {
+	display: block;
+}
+
+.collapsed {
+	display: none;
+}
+
 .comment-voting {
 	width: 25px;
 	height: 50px;
@@ -73,4 +81,24 @@ body {
 .reply {
 	margin-left: 10px;
 	margin-right: 10px;
+}
+
+.collapsed > i.icon-caret-down {
+	margin-left: 7px;
+	margin-right: 2px;
+	padding: 0px 3px;
+	cursor: pointer;
+}
+
+.noncollapsed > .comment-info > p > i.icon-caret-up {
+	margin-left: 2px;
+	margin-right: 2px;
+	padding: 0px 3px;
+	cursor: pointer;
+}
+
+.collapsed > i.icon-caret-down:hover,
+.noncollapsed > .comment-info > p > i.icon-caret-up:hover {
+	background-color: #000000;
+	cursor: pointer;
 }
