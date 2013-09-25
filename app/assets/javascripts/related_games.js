@@ -43,12 +43,6 @@ $(document).ready( function() {
 			$(this).toggleClass('color-red');
 		}
 	});
-	
-	// $(".reply-button").click(function() {
-	// 	comment_id = $(this).attr('comment_id');
-	// 	console.log(comment_id);
-	// 	$('#replyto_' + comment_id).toggle();
-	// });
 })
 
 $(document).on("click", ".reply-button", function () {
@@ -58,14 +52,12 @@ $(document).on("click", ".reply-button", function () {
 
 $(document).on("click", ".icon-caret-down", function () {
 	comment_id = $(this).attr('comment_id');
-	console.log(comment_id);
 	$(".comment_" + comment_id + " > .comment.noncollapsed").toggle();
 	$(".comment_" + comment_id + " > .comment.collapsed").toggle();
 })
 
 $(document).on("click", ".icon-caret-up", function () {
 	comment_id = $(this).attr('comment_id');
-	console.log(comment_id);
 	$(".comment_" + comment_id + " > .comment.noncollapsed").toggle();
 	$(".comment_" + comment_id + " > .comment.collapsed").toggle();
 })

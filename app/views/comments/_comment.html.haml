@@ -24,7 +24,7 @@
             = link_to User.find(comment.user_id).username, user_path(User.find(comment.user_id).slug)
       
           %span{style: "padding-left: 10px;font-size: 9px;"}= comment.created_at
-        .comment-body
+        .comment-body{style: "margin-left:25px;"}
           :markdown
             #{comment.body}
         .comment-options{style: "margin-bottom: 10px;"}
