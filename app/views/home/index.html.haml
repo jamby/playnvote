@@ -4,6 +4,13 @@
     %br
     .lead Check for any game and then compare it to any other game!
     .lead See what your fellow gamers have to say about similar or not-so similar games!
+    .col-md-6.col-md-offset-3
+      = form_tag search_path, method: :post, role: "form" do
+        .form-group
+          = text_field_tag :q, params[:q], class: "search-typeahead form-control input-lg", "data-provide" => "typeahead", autocomplete: "off", style: 'background-color: #cccccc; color: #000000'
+          = hidden_field_tag :q_id, '', class: "q_id"
+        %center
+          = submit_tag "Search", name: nil, class: "btn btn-primary btn-lg", style: "width: 200px;"
 .container
   %p
     This is the index page!
