@@ -1,23 +1,9 @@
 %center.voting-info
-  - if current_user and current_user.voted_up_on? relatedGame
-    %i.icon-arrow-up.color-green.clickable.upvote{class: size_classes, user_id: "#{ current_user.id if current_user }", game1_id: relatedGame.game1_id, game2_id: relatedGame.game2_id}
-  - else
-    %i.icon-arrow-up.clickable.upvote{class: size_classes, user_id: "#{ current_user.id if current_user }", game1_id: relatedGame.game1_id, game2_id: relatedGame.game2_id}
+  %i.icon-arrow-up.clickable.upvote{class: size_classes + ((current_user and current_user.voted_up_on? relatedGame) ? " color-green" : ""), user_id: "#{ current_user.id if current_user }", game1_id: relatedGame.game1_id, game2_id: relatedGame.game2_id}
   %br
   .votes-cumulative
-    - if current_user
-      -if current_user.voted_up_on? relatedGame
-        .color-green= relatedGame.upvotes.size - relatedGame.downvotes.size
-      -elsif current_user.voted_down_on? relatedGame
-        .color-red= relatedGame.upvotes.size - relatedGame.downvotes.size
-      -else
-        = relatedGame.upvotes.size - relatedGame.downvotes.size
-    - else
-      = relatedGame.upvotes.size - relatedGame.downvotes.size
-  - if current_user and current_user.voted_down_on? relatedGame
-    %i.icon-arrow-down.color-red.clickable.downvote{class: size_classes, user_id: "#{ current_user.id if current_user }", game1_id: relatedGame.game1_id, game2_id: relatedGame.game2_id}
-  - else
-    %i.icon-arrow-down.clickable.downvote{class: size_classes, user_id: "#{ current_user.id if current_user }", game1_id: relatedGame.game1_id, game2_id: relatedGame.game2_id}
+    %div{class: (("color-green" if current_user and current_user.voted_up_on? relatedGame) or ("color-red" if current_user and current_user.voted_down_on? relatedGame))}= relatedGame.upvotes.size - relatedGame.downvotes.size
+  %i.icon-arrow-down.clickable.downvote{class: size_classes + ((current_user and current_user.voted_down_on? relatedGame) ? " color-red" : ""), user_id: "#{ current_user.id if current_user }", game1_id: relatedGame.game1_id, game2_id: relatedGame.game2_id}
   .voting-info-numbers
     (
     %span.color-green.upvote-number #{relatedGame.upvotes.size}

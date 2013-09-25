@@ -8,15 +8,9 @@
         %span{style: "padding-left: 10px;font-size: 9px;"} (#{comment.children.size} #{comment.children.size != 1 ? "children" : "child"})
     .comment.noncollapsed
       .comment-voting
-        - if current_user and current_user.voted_up_on? comment
-          %i.icon-arrow-up.icon-large.color-green
-        - else
-          %i.icon-arrow-up.icon-large
+        %i.icon-arrow-up.icon-large{class: ("color-green" if current_user and current_user.voted_up_on? comment)}
         %div
-        - if current_user and current_user.voted_down_on? comment
-          %i.icon-arrow-down.icon-large.color-red
-        - else
-          %i.icon-arrow-down.icon-large
+        %i.icon-arrow-down.icon-large{class: ("color-red" if current_user and current_user.voted_down_on? comment)}
       .comment-info
         %p
           %i.icon-caret-up{comment_id: comment.id}
