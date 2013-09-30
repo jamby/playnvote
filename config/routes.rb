@@ -11,7 +11,12 @@ Playnvote::Application.routes.draw do
       post :upvote
       post :downvote
     end
-    resources :comments
+    resources :comments do
+      collection do
+        post :upvote_comment
+        post :downvote_comment
+      end
+    end
   end
 
   root to: 'home#index'

@@ -30,4 +30,48 @@ class CommentsController < ApplicationController
       format.js
     end
   end
+  
+  def upvote_comment
+    if params[:user_id].empty?
+      flash.now[:error] = "You need to be logged in!"
+      
+      respond_to do |format|
+        format.js
+      end
+    else
+      @user = User.find(params[:user_id])
+      @votedComment = Comment.find(params[:comment_id])
+      if @user.voted_on? @votedComment and @user.voted_up_on? @votedComment
+        @votedComment.unvote voter: @user
+      else
+        @user.up_votes @votedComment
+      end
+      
+      respond_to do |format|
+        format.json { render json: { upvotes: @votedComment.upvotes.size, downvotes: @votedComment.downvotes.size }.to_json }
+      end
+    end
+  end
+  
+  def downvote_comment
+    if params[:user_id].empty?
+      flash.now[:error] = "You need to be logged in!"
+      
+      respond_to do |format|
+        format.js
+      end
+    else
+      @user = User.find(params[:user_id])
+      @votedComment = Comment.find(params[:comment_id])
+      if @user.voted_on? @votedComment and @user.voted_down_on? @votedComment
+        @votedComment.unvote voter: @user
+      else
+        @user.down_votes @votedComment
+      end
+    
+      respond_to do |format|
+        format.json { render json: { upvotes: @votedComment.upvotes.size, downvotes: @votedComment.downvotes.size }.to_json }
+      end
+    end
+  end
 end

@@ -8,16 +8,23 @@
         %span{style: "padding-left: 10px;font-size: 9px;"} (#{comment.children.size} #{comment.children.size != 1 ? "children" : "child"})
     .comment.noncollapsed
       .comment-voting
-        %i.icon-arrow-up.icon-large{class: ("color-green" if current_user and current_user.voted_up_on? comment)}
-        %div
-        %i.icon-arrow-down.icon-large{class: ("color-red" if current_user and current_user.voted_down_on? comment)}
+        %center
+          %i.icon-arrow-up.icon-large.clickable.upvote-comment{class: ("color-green" if current_user and current_user.voted_up_on? comment), user_id: current_user.id, related_game_id: comment.commentable_id, comment_id: comment.id}
+          .comment-votes-cumulative{class: (("color-green" if current_user and current_user.voted_up_on? comment) or ("color-red" if current_user and current_user.voted_down_on? comment))}= comment.upvotes.size - comment.downvotes.size
+          %i.icon-arrow-down.icon-large.clickable.downvote-comment{class: ("color-red" if current_user and current_user.voted_down_on? comment), user_id: current_user.id, related_game_id: comment.commentable_id, comment_id: comment.id}
       .comment-info
         %p
           %i.icon-caret-up{comment_id: comment.id}
           %strong
             = link_to User.find(comment.user_id).username, user_path(User.find(comment.user_id).slug)
       
-          %span{style: "padding-left: 10px;font-size: 9px;"}= comment.created_at
+          %span{style: "padding-left: 10px;font-size: 9px;", title: "#{comment.created_at}"} #{time_ago_in_words(comment.created_at)} ago
+          %span{class: "comments-vote-numbers_#{comment.id}", style: "padding-left: 10px;font-size: 9px;"}
+            (
+            %span.color-green= comment.upvotes.size
+            |
+            %span.color-red= comment.downvotes.size
+            )
         .comment-body{style: "margin-left:25px;"}
           :markdown
             #{comment.body}

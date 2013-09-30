@@ -61,6 +61,7 @@ body {
 	height: 50px;
 	display: block;
 	float: left;
+	margin-right: 1px;
 }
 
 .comment-info {
