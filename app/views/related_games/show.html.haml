@@ -41,4 +41,4 @@
     .col-md-12
       #comments
         - if !@comments.empty?
-          = render partial: 'comments/comment', collection: @relatedGame.root_comments, as: :comment, locals: { ttl_cmts: 1 }
+          = render partial: 'comments/comment', collection: @relatedGame.root_comments.sort_by{ |c| c.upvotes.size - c.downvotes.size }.reverse, as: :comment, locals: { ttl_cmts: 1 }

@@ -6,7 +6,7 @@
   %i.icon-arrow-down.clickable.downvote{class: size_classes + ((current_user and current_user.voted_down_on? relatedGame) ? " color-red" : ""), user_id: "#{ current_user.id if current_user }", game1_id: relatedGame.game1_id, game2_id: relatedGame.game2_id}
   .voting-info-numbers
     (
-    %span.color-green.upvote-number #{relatedGame.upvotes.size}
+    %span.color-green #{relatedGame.upvotes.size}
     |
-    %span.color-red.downvote-number #{relatedGame.downvotes.size}
+    %span.color-red #{relatedGame.downvotes.size}
     )

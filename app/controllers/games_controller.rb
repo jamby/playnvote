@@ -22,7 +22,7 @@ class GamesController < ApplicationController
     @games.delete(@game_eval)
 
     @relatedGames = RelatedGame.where(game1_id: @game.id) + RelatedGame.where(game2_id: @game.id)
-    @relatedGames = @relatedGames.sort_by{|rg| rg.upvotes.size }.reverse
+    @relatedGames = @relatedGames.sort_by{ |rg| rg.upvotes.size - rg.downvotes.size }.reverse
     
     # More auto-complete
     respond_to do |format|

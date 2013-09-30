@@ -49,4 +49,4 @@
           %div{style: "clear:both;"}
         - if comment.has_children?
           .reply
-            = render partial: 'comments/comment', collection: comment.children, as: :comment, locals: { ttl_cmts: (ttl_cmts + 1) }
+            = render partial: 'comments/comment', collection: comment.children.sort_by{ |c| c.upvotes.size - c.downvotes.size }.reverse, as: :comment, locals: { ttl_cmts: (ttl_cmts + 1) }

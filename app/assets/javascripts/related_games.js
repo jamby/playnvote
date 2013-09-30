@@ -11,7 +11,7 @@ $(document).ready( function() {
 				// update number
 				if (user_id != "") {
 					_this.siblings('.votes-cumulative').find('div').html(data.upvotes - data.downvotes);
-					_this.siblings('.voting-info-numbers').html("\( <span class=\"color-green upvote-number\">" + data.upvotes + " </span>| <span class=\"color-red downvote-number\">" + data.downvotes + "</span> \)");
+					_this.siblings('.voting-info-numbers').html("\( <span class=\"color-green\">" + data.upvotes + " </span>| <span class=\"color-red\">" + data.downvotes + "</span> \)");
 				}
 			});
 		
@@ -33,7 +33,7 @@ $(document).ready( function() {
 				// update number
 				if (user_id != "") {
 					_this.siblings('.votes-cumulative').find('div').html(data.upvotes - data.downvotes);
-					_this.siblings('.voting-info-numbers').html("\( <span class=\"color-green upvote-number\">" + data.upvotes + " </span>| <span class=\"color-red downvote-number\">" + data.downvotes + "</span> \)");
+					_this.siblings('.voting-info-numbers').html("\( <span class=\"color-green\">" + data.upvotes + " </span>| <span class=\"color-red\">" + data.downvotes + "</span> \)");
 				}
 			});
 		
