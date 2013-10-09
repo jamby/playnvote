@@ -32,7 +32,7 @@ namespace :playnvote do
                                 'title' => result['results'][i]['name'], 
                                 'release_date' => result['results'][i]['original_release_date'] ? DateTime.strptime(result['results'][i]['original_release_date'], '%Y-%m-%d %H:%M:%S').to_date : "No date", 
                                 'cover_art' => result['results'][i]['image'] ? result['results'][i]['image']['super_url'] : "No image",
-                                'developer' => developer['results']['developers'] ? Array.new(developer['results']['developers'].length){ |dev| developer['results']['developers'][dev]['name'] } : "No Data for Developer",
+                                'developer' => developer['results']['developers'] ? Array.new(developer['results']['developers'].length){ |dev| developer['results']['developers'][dev]['name'] }.compact : ["No Data for Developer"],
                                 'platforms' => Array.new(result['results'][i]['platforms'].length){ |p| platform_abbrev[result['results'][i]['platforms'][p]['name']] }.compact }
           end
         end

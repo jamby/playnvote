@@ -4,6 +4,8 @@
       %h1
         = @game.title
       %p
+        = @game.developer.join(" | ")
+      %p
         Release Date: #{@game.release_date.strftime("%B %-d, %Y")}
 
       %p
