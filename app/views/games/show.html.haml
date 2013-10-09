@@ -1,11 +1,18 @@
-.container
-  %h1
-    = @game.title
-  %p
-    Release Date: #{@game.release_date.strftime("%B %-d, %Y")}
+.container{style: "padding-top: 20px;"}
+  .col-md-6
+    .well
+      %h1
+        = @game.title
+      %p
+        Release Date: #{@game.release_date.strftime("%B %-d, %Y")}
 
-  %p
-    = @game.platform.join(" | ")
+      %p
+        = @game.platform.join(" | ")
+  .col-md-6
+    - if @game.cover_art
+      .well
+        %center
+          = image_tag(@game.cover_art, class: "game_cover_art")
   
   %br
   %br

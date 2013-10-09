@@ -103,3 +103,7 @@ body {
 	background-color: #000000;
 	cursor: pointer;
 }
+
+.game_cover_art {
+	max-width: 300px;
+}
