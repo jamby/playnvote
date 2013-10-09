@@ -2,7 +2,7 @@ class GamesController < ApplicationController
   # respond :html, :json
   
   def index
-    @games = Game.all
+    @games = Game.find(:all, select: 'id, title')
     respond_to do |format|
       format.html
       format.json { render json: { games: @games } }
