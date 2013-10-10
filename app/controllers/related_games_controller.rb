@@ -6,9 +6,9 @@ class RelatedGamesController < ApplicationController
   end
   
   def show
-    @relatedGame = RelatedGame.find(params[:id])
-    @game1 = Game.find(RelatedGame.find(params[:id]).game1_id)
-    @game2 = Game.find(RelatedGame.find(params[:id]).game2_id)
+    @relatedGame = RelatedGame.find_by_token(params[:id])
+    @game1 = Game.find(@relatedGame.game1_id)
+    @game2 = Game.find(@relatedGame.game2_id)
     @comments = @relatedGame.comment_threads
     if user_signed_in?
       @new_comment = Comment.build_from(@relatedGame, current_user.id, "")

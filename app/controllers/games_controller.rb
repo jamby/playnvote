@@ -48,10 +48,10 @@ class GamesController < ApplicationController
     @find_related = RelatedGame.where(game1_id: [@current_game.id, @search_game.id], game2_id: [@current_game.id, @search_game.id])
 
     if !@find_related.empty?
-      redirect_to related_game_path(@find_related.first.id)
+      redirect_to related_game_path(@find_related.first)
     else
       @new_related = RelatedGame.create(game1_id: @current_game.id, game2_id: @search_game.id)
-      redirect_to related_game_path(@new_related.id)      
+      redirect_to related_game_path(@new_related)
     end
   end
 end
