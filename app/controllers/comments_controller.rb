@@ -22,7 +22,7 @@ class CommentsController < ApplicationController
   end
   
   def destroy
-    @relatedGame = RelatedGame.find_by_token(params[:related_game_id])
+    @relatedGame = RelatedGame.find(params[:related_game_id])
     @all_comments = @relatedGame.comment_threads
     @comment = Comment.find(params[:id])
     @comment.destroy
