@@ -2,13 +2,13 @@ if ("<%= @comment.parent_id %>") {
 	if ($('.comment_<%= @comment.parent_id %> > .comment > .comment-info > .reply').length <= 0) {
 		$("#replyto_<%= @comment.parent_id %>").after("<div class='reply'></div>");
 	}
-	$('.comment_<%= @comment.parent_id %> > .comment > .comment-info > .reply').append("<%= escape_javascript(render partial: 'comment', locals: { comment: @comment, ttl_cmts: @ttl_cmts } ) %>");
+	$('.comment_<%= @comment.parent_id %> > .comment > .comment-info > .reply').prepend("<%= escape_javascript(render partial: 'comment', locals: { comment: @comment, ttl_cmts: @ttl_cmts } ) %>");
 	
 	$(".body_<%= @comment.parent_id %>").val('');
 	$("#replyto_<%= @comment.parent_id %>").toggle();
 }
 else {
-	$('#comments').append("<%= escape_javascript(render partial: 'comment', locals: { comment: @comment, ttl_cmts: @ttl_cmts } ) %>");
+	$('#comments').prepend("<%= escape_javascript(render partial: 'comment', locals: { comment: @comment, ttl_cmts: @ttl_cmts } ) %>");
 	
 	if ("<%= @comment.body %>") {
 		$("#comment_body").val('');
