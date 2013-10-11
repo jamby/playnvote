@@ -8,7 +8,9 @@
           %li= link_to "Stuff", '#'
           %li= link_to "Stuff 2", '#'
           %li.dropdown
-            = link_to '<i class="icon-search"></i>'.html_safe, '#', {class: "dropdown-toggle", "data-toggle" => "dropdown"}
+            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => '#'}
+              %i.icon-search
+            / = link_to '<i class="icon-search"></i>'.html_safe, '#', {class: "dropdown-toggle", "data-toggle" => "dropdown"}
             %ul.dropdown-menu.pull-right{style: "min-width: 260px;", "aria-labelledby" => "dLabel", role: "menu"}
               = form_tag search_path, method: :post, class: "form-inline header-search", role: "form" do
                 .form-group
@@ -16,7 +18,14 @@
                   = hidden_field_tag :q_id, '', class: "q_id"
                 = submit_tag "Search", name: nil, class: "btn btn-inverse"
           -if user_signed_in?
-            = link_to "Sign out", destroy_user_session_path, class: "btn btn-primary navbar-btn", method: :delete
+            %li.dropdown
+              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => '#'}
+                = current_user.username
+                %b.caret
+              %ul.dropdown-menu.pull-right
+                %li= link_to "Edit profile", '#'
+                %li.divider{role: "presentation"}
+                %li= link_to "Sign out", destroy_user_session_path, method: :delete
           -else
             = link_to "Sign in", new_user_session_path, class: "btn btn-primary navbar-btn"
             = link_to "Register", new_user_registration_path, class: "btn btn-primary navbar-btn"
