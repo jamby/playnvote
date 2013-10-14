@@ -45,7 +45,8 @@
                   = f.hidden_field :parent_id, value: comment.id
                   = f.hidden_field :ttl_cmts, value: ttl_cmts
                 .form-group
-                  = f.submit "Submit", class: "btn btn-sm"
+                  = f.submit "Submit", class: "btn btn-sm btn-primary"
+                  = f.submit "Cancel", class: "btn btn-sm cancel-btn", type: 'button', comment_id: comment.id
           %div{style: "clear:both;"}
         - if comment.has_children?
           .reply

@@ -46,8 +46,13 @@ $(document).ready( function() {
 })
 
 $(document).on("click", ".reply-button", function () {
-		comment_id = $(this).attr('comment_id');
-		$('#replyto_' + comment_id).toggle();
+	comment_id = $(this).attr('comment_id');
+	$('#replyto_' + comment_id).show();
+})
+
+$(document).on("click", ".cancel-btn", function () {
+	comment_id = $(this).attr('comment_id');
+	$('#replyto_' + comment_id).hide();
 })
 
 $(document).on("click", ".icon-caret-down", function () {
