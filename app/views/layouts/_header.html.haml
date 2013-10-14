@@ -23,7 +23,7 @@
                 = current_user.username
                 %b.caret
               %ul.dropdown-menu.pull-right
-                %li= link_to "Edit profile", '#'
+                %li= link_to "Edit profile", edit_user_registration_path
                 %li.divider{role: "presentation"}
                 %li= link_to "Sign out", destroy_user_session_path, method: :delete
           -else
