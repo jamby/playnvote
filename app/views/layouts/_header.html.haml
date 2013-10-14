@@ -18,8 +18,8 @@
                   = hidden_field_tag :q_id, '', class: "q_id"
                 = submit_tag "Search", name: nil, class: "btn btn-inverse"
           -if user_signed_in?
-            %li.dropdown
-              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => '#'}
+            %li.dropdown{class: active_header_link(["users", "show"], ["devise/registrations", "edit"])}
+              %a.dropdown-toggle{:href => user_path(current_user)}
                 = current_user.username
                 %b.caret
               %ul.dropdown-menu.pull-right
