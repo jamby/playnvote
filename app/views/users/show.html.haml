@@ -1,7 +1,9 @@
 .container{style: "padding-top: 20px;"}
   .col-md-4
     %h3= @user.username
-    Total Votes: #{@votes}
+    Total Karma: #{@karma}
+    %br
+    Total Comments: #{@num_votes}
     %br
     Joined: #{@user.created_at.strftime("%m/%d/%Y")}
   .col-md-8
