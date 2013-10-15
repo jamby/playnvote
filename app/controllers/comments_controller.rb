@@ -24,7 +24,7 @@ class CommentsController < ApplicationController
   def destroy
     @relatedGame = RelatedGame.find(params[:related_game_id])
     @all_comments = @relatedGame.comment_threads
-    @comment = Comment.find(params[:id])
+    @comment = Comment.find_by_token(params[:id])
     @comment.destroy
     respond_to do |format|
       format.js
@@ -40,7 +40,7 @@ class CommentsController < ApplicationController
       end
     else
       @user = User.find(params[:user_id])
-      @votedComment = Comment.find(params[:comment_id])
+      @votedComment = Comment.find_by_token(params[:comment_token])
       if @user.voted_on? @votedComment and @user.voted_up_on? @votedComment
         @votedComment.unvote voter: @user
       else
@@ -62,7 +62,7 @@ class CommentsController < ApplicationController
       end
     else
       @user = User.find(params[:user_id])
-      @votedComment = Comment.find(params[:comment_id])
+      @votedComment = Comment.find_by_token(params[:comment_token])
       if @user.voted_on? @votedComment and @user.voted_down_on? @votedComment
         @votedComment.unvote voter: @user
       else

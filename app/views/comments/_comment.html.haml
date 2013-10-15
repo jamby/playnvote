@@ -1,7 +1,7 @@
 - if comment.try(:id) != nil
-  %div{class: "comment_#{comment.id}"}
+  %div{class: "comment_#{comment.token}"}
     .comment.collapsed
-      %i.icon-caret-down{comment_id: comment.id}
+      %i.icon-caret-down{comment_token: comment.token}
       %em
         = link_to User.find(comment.user_id).username, user_path(User.find(comment.user_id).slug)
       
@@ -9,17 +9,17 @@
     .comment.noncollapsed
       .comment-voting
         %center
-          %i.icon-arrow-up.icon-large.clickable.upvote-comment{class: ("color-green" if current_user and current_user.voted_up_on? comment), user_id: current_user.id, related_game_id: comment.commentable_id, comment_id: comment.id}
+          %i.icon-arrow-up.icon-large.clickable.upvote-comment{class: ("color-green" if current_user and current_user.voted_up_on? comment), user_id: current_user.id, related_game_id: comment.commentable_id, comment_token: comment.token}
           .comment-votes-cumulative{class: (("color-green" if current_user and current_user.voted_up_on? comment) or ("color-red" if current_user and current_user.voted_down_on? comment))}= comment.upvotes.size - comment.downvotes.size
-          %i.icon-arrow-down.icon-large.clickable.downvote-comment{class: ("color-red" if current_user and current_user.voted_down_on? comment), user_id: current_user.id, related_game_id: comment.commentable_id, comment_id: comment.id}
+          %i.icon-arrow-down.icon-large.clickable.downvote-comment{class: ("color-red" if current_user and current_user.voted_down_on? comment), user_id: current_user.id, related_game_id: comment.commentable_id, comment_token: comment.token}
       .comment-info
         %p
-          %i.icon-caret-up{comment_id: comment.id}
+          %i.icon-caret-up{comment_token: comment.token}
           %strong
             = link_to User.find(comment.user_id).username, user_path(User.find(comment.user_id).slug)
       
           %span{style: "padding-left: 10px;font-size: 9px;", title: "#{comment.created_at}"} #{time_ago_in_words(comment.created_at)} ago
-          %span{class: "comments-vote-numbers_#{comment.id}", style: "padding-left: 10px;font-size: 9px;"}
+          %span{class: "comments-vote-numbers_#{comment.token}", style: "padding-left: 10px;font-size: 9px;"}
             (
             %span.color-green= comment.upvotes.size
             |
@@ -33,20 +33,20 @@
             - if current_user.id == comment.user_id
               = button_to "delete", related_game_comment_path(comment.commentable_id, comment), method: :delete, remote: true, class: "btn-link", style: "float:left;padding-top: 1px;"
             - if ttl_cmts.to_i <= 7
-              %button.btn-link.reply-button{style: "float:left;", comment_id: comment.id} reply
+              %button.btn-link.reply-button{style: "float:left;", comment_token: comment.token} reply
           %div{style: "clear:both;"}
-        .comment-reply{id: "replyto_#{comment.id}"}
+        .comment-reply{id: "replyto_#{comment.token}"}
           %div{style: "width: 380px;padding: 0px 15px;"}
             - if user_signed_in?
               = form_for([@relatedGame, Comment.new], remote: true) do |f|
                 .form-group
-                  = f.text_area :body, class: "form-control body_#{comment.id}", rows: "3"
+                  = f.text_area :body, class: "form-control body_#{comment.token}", rows: "3"
                   = f.hidden_field :user_id, value: current_user.id
                   = f.hidden_field :parent_id, value: comment.id
                   = f.hidden_field :ttl_cmts, value: ttl_cmts
                 .form-group
                   = f.submit "Submit", class: "btn btn-sm btn-primary"
-                  = f.submit "Cancel", class: "btn btn-sm cancel-btn", type: 'button', comment_id: comment.id
+                  = f.submit "Cancel", class: "btn btn-sm cancel-btn", type: 'button', comment_token: comment.token
           %div{style: "clear:both;"}
         - if comment.has_children?
           .reply

@@ -46,35 +46,35 @@ $(document).ready( function() {
 })
 
 $(document).on("click", ".reply-button", function () {
-	comment_id = $(this).attr('comment_id');
-	$('#replyto_' + comment_id).show();
+	comment_token = $(this).attr('comment_token');
+	$('#replyto_' + comment_token).show();
 })
 
 $(document).on("click", ".cancel-btn", function () {
-	comment_id = $(this).attr('comment_id');
-	$('#replyto_' + comment_id).hide();
+	comment_token = $(this).attr('comment_token');
+	$('#replyto_' + comment_token).hide();
 })
 
 $(document).on("click", ".icon-caret-down", function () {
-	comment_id = $(this).attr('comment_id');
-	$(".comment_" + comment_id + " > .comment.noncollapsed").toggle();
-	$(".comment_" + comment_id + " > .comment.collapsed").toggle();
+	comment_token = $(this).attr('comment_token');
+	$(".comment_" + comment_token + " > .comment.noncollapsed").toggle();
+	$(".comment_" + comment_token + " > .comment.collapsed").toggle();
 })
 
 $(document).on("click", ".icon-caret-up", function () {
-	comment_id = $(this).attr('comment_id');
-	$(".comment_" + comment_id + " > .comment.noncollapsed").toggle();
-	$(".comment_" + comment_id + " > .comment.collapsed").toggle();
+	comment_token = $(this).attr('comment_token');
+	$(".comment_" + comment_token + " > .comment.noncollapsed").toggle();
+	$(".comment_" + comment_token + " > .comment.collapsed").toggle();
 })
 
 $(document).on("click", ".upvote-comment", function(event) {
 	user_id = $(this).attr('user_id');
 	related_game_id = $(this).attr('related_game_id');
-	comment_id = $(this).attr('comment_id');
+	comment_token = $(this).attr('comment_token');
 	_this = $(this);
-	_votes = $('.comment_' + comment_id).find('.comments-vote-numbers_' + comment_id);
+	_votes = $('.comment_' + comment_token).find('.comments-vote-numbers_' + comment_token);
 	
-	$.post('/compare/' + related_game_id + '/comments/upvote_comment', {user_id: user_id, comment_id: comment_id},
+	$.post('/compare/' + related_game_id + '/comments/upvote_comment', {user_id: user_id, comment_token: comment_token},
 		function(data) {
 			// update number
 			if (user_id != "") {
@@ -93,11 +93,11 @@ $(document).on("click", ".upvote-comment", function(event) {
 $(document).on("click", ".downvote-comment", function(event) {
 	user_id = $(this).attr('user_id');
 	related_game_id = $(this).attr('related_game_id');
-	comment_id = $(this).attr('comment_id');
+	comment_token = $(this).attr('comment_token');
 	_this = $(this);
-	_votes = $('.comment_' + comment_id).find('.comments-vote-numbers_' + comment_id);
+	_votes = $('.comment_' + comment_token).find('.comments-vote-numbers_' + comment_token);
 	
-	$.post('/compare/' + related_game_id + '/comments/downvote_comment', {user_id: user_id, comment_id: comment_id},
+	$.post('/compare/' + related_game_id + '/comments/downvote_comment', {user_id: user_id, comment_token: comment_token},
 		function(data) {
 			// update number
 			if (user_id != "") {

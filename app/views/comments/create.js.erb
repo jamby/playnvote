@@ -1,11 +1,12 @@
-if ("<%= @comment.parent_id %>") {
-	if ($('.comment_<%= @comment.parent_id %> > .comment > .comment-info > .reply').length <= 0) {
-		$("#replyto_<%= @comment.parent_id %>").after("<div class='reply'></div>");
+var parent_token = "<%= Comment.find(@comment.parent_id).token if @comment.parent_id %>";
+if (parent_token) {
+	if ($(".comment_" + parent_token + " > .comment > .comment-info > .reply").length <= 0) {
+		$("#replyto_" + parent_token).after("<div class='reply'></div>");
 	}
-	$('.comment_<%= @comment.parent_id %> > .comment > .comment-info > .reply').prepend("<%= escape_javascript(render partial: 'comment', locals: { comment: @comment, ttl_cmts: @ttl_cmts } ) %>");
+	$(".comment_" + parent_token + " > .comment > .comment-info > .reply").prepend("<%= escape_javascript(render partial: 'comment', locals: { comment: @comment, ttl_cmts: @ttl_cmts } ) %>");
 	
-	$(".body_<%= @comment.parent_id %>").val('');
-	$("#replyto_<%= @comment.parent_id %>").toggle();
+	$(".body_" + parent_token).val('');
+	$("#replyto_" + parent_token).toggle();
 }
 else {
 	$('#comments').prepend("<%= escape_javascript(render partial: 'comment', locals: { comment: @comment, ttl_cmts: @ttl_cmts } ) %>");

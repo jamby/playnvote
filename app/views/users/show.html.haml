@@ -13,14 +13,14 @@
       .comment{style: "border: 0px;"}
         .comment-voting
           %center
-            %i.icon-arrow-up.icon-large.clickable.upvote-comment{class: ("color-green" if current_user and current_user.voted_up_on? comment), user_id: current_user.id, related_game_id: comment.commentable_id, comment_id: comment.id}
+            %i.icon-arrow-up.icon-large.clickable.upvote-comment{class: ("color-green" if current_user and current_user.voted_up_on? comment), user_id: current_user.id, related_game_id: comment.commentable_id, comment_token: comment.token}
             .comment-votes-cumulative{class: (("color-green" if current_user and current_user.voted_up_on? comment) or ("color-red" if current_user and current_user.voted_down_on? comment))}= comment.upvotes.size - comment.downvotes.size
-            %i.icon-arrow-down.icon-large.clickable.downvote-comment{class: ("color-red" if current_user and current_user.voted_down_on? comment), user_id: current_user.id, related_game_id: comment.commentable_id, comment_id: comment.id}
+            %i.icon-arrow-down.icon-large.clickable.downvote-comment{class: ("color-red" if current_user and current_user.voted_down_on? comment), user_id: current_user.id, related_game_id: comment.commentable_id, comment_token: comment.token}
         .comment-info
           %p
             %strong= link_to "#{User.find(comment.user_id).username}", user_path(User.find(comment.user_id))
             %span{style: "padding-left: 10px;font-size: 9px;", title: "#{comment.created_at}"} #{time_ago_in_words(comment.created_at)} ago
-            %span{class: "comments-vote-numbers_#{comment.id}", style: "padding-left: 10px;font-size: 9px;"}
+            %span{class: "comments-vote-numbers_#{comment.token}", style: "padding-left: 10px;font-size: 9px;"}
               (
               %span.color-green= comment.upvotes.size
               |

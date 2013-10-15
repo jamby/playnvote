@@ -1,4 +1,5 @@
 class Comment < ActiveRecord::Base
+  before_create :generate_token
   acts_as_nested_set :scope => [:commentable_id, :commentable_type]
 
   validates :body, :presence => true
@@ -9,7 +10,7 @@ class Comment < ActiveRecord::Base
   acts_as_votable
 
   belongs_to :commentable, :polymorphic => true
-  attr_accessible :commentable, :body, :user_id
+  attr_accessible :commentable, :body, :user_id, :token
 
   # NOTE: Comments belong to a user
   belongs_to :user
@@ -45,5 +46,18 @@ class Comment < ActiveRecord::Base
   # given the commentable class name and id
   def self.find_commentable(commentable_str, commentable_id)
     commentable_str.constantize.find(commentable_id)
+  end
+  
+  def to_param
+    self.token
+  end
+
+protected
+
+  def generate_token
+    self.token = loop do
+      token = SecureRandom.hex(8)
+      break token unless RelatedGame.exists?(token: token)
+    end
   end
 end
