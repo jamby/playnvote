@@ -29,3 +29,6 @@
           .comment-body{style: "margin-left:25px;"}
             :markdown
               #{comment.body}
+          .comment-options{style: "margin-bottom: 10px;"}
+            = button_to "permalink", related_game_comment_path(relatedGame_token(comment.commentable_id), comment), class: "btn-link", style: "float:left;", method: 'get'
+            %div{style: "clear:both;"}

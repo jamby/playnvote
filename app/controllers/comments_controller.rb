@@ -1,4 +1,14 @@
 class CommentsController < ApplicationController
+  def show
+    @comment = Comment.find_by_token(params[:id])
+    @relatedGame = RelatedGame.find_by_token(params[:related_game_id])
+    @game1 = Game.find(@relatedGame.game1_id)
+    @game2 = Game.find(@relatedGame.game2_id)
+    if user_signed_in?
+      @new_comment = Comment.build_from(@relatedGame, current_user.id, "")
+    end
+  end
+  
   def create
     @relatedGame = RelatedGame.find_by_token(params[:related_game_id])
     @all_comments = @relatedGame.comment_threads
