@@ -29,26 +29,27 @@
           :markdown
             #{comment.body}
         .comment-options{style: "margin-bottom: 10px;"}
-          = button_to "permalink", related_game_comment_path(@relatedGame, comment), class: "btn-link", style: "float:left;", method: 'get'
-          - if user_signed_in?
+          = button_to "permalink", related_game_comment_path(relatedGame_token(comment.commentable_id), comment), class: "btn-link", style: "float:left;", method: 'get'
+          - if user_signed_in? and params[:controller] != 'users'
             - if current_user.id == comment.user_id
               = button_to "delete", related_game_comment_path(comment.commentable_id, comment), method: :delete, remote: true, class: "btn-link", style: "float:left;"
             - if ttl_cmts.to_i <= 7
               %button.btn-link.reply-button{style: "float:left;", comment_token: comment.token} reply
           %div{style: "clear:both;"}
-        .comment-reply{id: "replyto_#{comment.token}"}
-          %div{style: "width: 380px;padding: 0px 15px;"}
-            - if user_signed_in?
-              = form_for([@relatedGame, Comment.new], remote: true) do |f|
-                .form-group
-                  = f.text_area :body, class: "form-control body_#{comment.token}", rows: "3"
-                  = f.hidden_field :user_id, value: current_user.id
-                  = f.hidden_field :parent_id, value: comment.id
-                  = f.hidden_field :ttl_cmts, value: ttl_cmts
-                .form-group
-                  = f.submit "Submit", class: "btn btn-sm btn-primary"
-                  = f.submit "Cancel", class: "btn btn-sm cancel-btn", type: 'button', comment_token: comment.token
-          %div{style: "clear:both;"}
-        - if comment.has_children?
-          .reply
-            = render partial: 'comments/comment', collection: comment.children.sort_by{ |c| c.upvotes.size - c.downvotes.size }.reverse, as: :comment, locals: { ttl_cmts: (ttl_cmts + 1) }
+        - unless params[:controller] == 'users'
+          .comment-reply{id: "replyto_#{comment.token}"}
+            %div{style: "width: 380px;padding: 0px 15px;"}
+              - if user_signed_in?
+                = form_for([@relatedGame, Comment.new], remote: true) do |f|
+                  .form-group
+                    = f.text_area :body, class: "form-control body_#{comment.token}", rows: "3"
+                    = f.hidden_field :user_id, value: current_user.id
+                    = f.hidden_field :parent_id, value: comment.id
+                    = f.hidden_field :ttl_cmts, value: ttl_cmts
+                  .form-group
+                    = f.submit "Submit", class: "btn btn-sm btn-primary"
+                    = f.submit "Cancel", class: "btn btn-sm cancel-btn", type: 'button', comment_token: comment.token
+            %div{style: "clear:both;"}
+          - if comment.has_children?
+            .reply
+              = render partial: 'comments/comment', collection: comment.children.sort_by{ |c| c.upvotes.size - c.downvotes.size }.reverse, as: :comment, locals: { ttl_cmts: (ttl_cmts + 1) }

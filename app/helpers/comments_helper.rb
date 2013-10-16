@@ -1,4 +1,8 @@
 module CommentsHelper
+  def relatedGame_token(commentable_id)
+    RelatedGame.find(commentable_id).token
+  end
+  
   def get_ttl_cmts(comment_id)
     ttl_cmts = 1
     cmt = Comment.find(comment_id)
