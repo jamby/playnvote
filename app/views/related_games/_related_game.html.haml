@@ -3,10 +3,7 @@
     .col-md-1
       = render 'shared/voting', relatedGame: relatedGame
     .col-md-11
-      - if Game.find(relatedGame.game1_id).title == @game.title
-        = link_to Game.find(relatedGame.game2_id).title, related_game_path(relatedGame)
-      - else
-        = link_to Game.find(relatedGame.game1_id).title, related_game_path(relatedGame)
+      = link_to (Game.find(relatedGame.game1_id).title == @game.title) ? Game.find(relatedGame.game2_id).title : Game.find(relatedGame.game1_id).title, related_game_path(relatedGame)
       %br
       - if @rgComments[index]
         %strong{style: "font-size: 12px; margin-left:20px;"}
