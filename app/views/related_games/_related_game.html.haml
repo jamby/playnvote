@@ -1,9 +1,20 @@
-- @relatedGames.each do |relatedGame|
+- @relatedGames.each_with_index do |relatedGame, index|
   .row
     .col-md-1
       = render 'shared/voting', relatedGame: relatedGame
     .col-md-11
       - if Game.find(relatedGame.game1_id).title == @game.title
-        = Game.find(relatedGame.game2_id).title
+        = link_to Game.find(relatedGame.game2_id).title, related_game_path(relatedGame)
       - else
-        = Game.find(relatedGame.game1_id).title
+        = link_to Game.find(relatedGame.game1_id).title, related_game_path(relatedGame)
+      %br
+      - if @rgComments[index]
+        %strong{style: "font-size: 12px; margin-left:20px;"}
+          = link_to User.find(@rgComments[index].user_id).username, user_path(User.find(@rgComments[index].user_id).slug)
+  
+        %span{style: "padding-left: 10px;font-size: 9px;", title: "#{@rgComments[index].created_at}"} #{time_ago_in_words(@rgComments[index].created_at)} ago
+        %br
+        .rg-comment
+          %p
+            = truncate(@rgComments[index].body.html_safe, length: 250)
+  %br

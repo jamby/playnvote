@@ -26,8 +26,8 @@
             %span.color-red= comment.downvotes.size
             )
         .comment-body{style: "margin-left:25px;"}
-          :markdown
-            #{comment.body}
+          %p
+            = comment.body.html_safe
         .comment-options{style: "margin-bottom: 10px;"}
           = button_to "permalink", related_game_comment_path(relatedGame_token(comment.commentable_id), comment), class: "btn-link", style: "float:left;", method: 'get'
           - if user_signed_in? and params[:controller] != 'users'
