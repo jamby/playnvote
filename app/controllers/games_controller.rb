@@ -17,9 +17,7 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
     
     # This is the auto-complete
-    @game_eval = @game.instance_eval{|g|{title: g.title, id: g.id}}
-    @games = Game.all.map{|g|{title: g.title, id: g.id}}
-    @games.delete(@game_eval)
+    @games = Game.find(:all, select: 'id, title', conditions: ["id != ?", @game.id])
 
     @relatedGames = RelatedGame.where(game1_id: @game.id) + RelatedGame.where(game2_id: @game.id)
     @relatedGames = @relatedGames.sort_by{ |rg| rg.upvotes.size - rg.downvotes.size }.reverse.take(3)
