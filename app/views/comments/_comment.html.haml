@@ -1,5 +1,7 @@
 - if comment.try(:id) != nil
   %div{class: "comment_#{comment.token}"}
+    - if params[:controller] == "users"
+      = link_to "#{Game.find(RelatedGame.find(comment.commentable_id).game1_id).title} - #{Game.find(RelatedGame.find(comment.commentable_id).game2_id).title}", related_game_path(RelatedGame.find(comment.commentable_id)) 
     .comment.collapsed{style: (params[:controller] == "users") ? "border: 0px;" : ""}
       %i.icon-caret-down{comment_token: comment.token}
       %em
