@@ -8,4 +8,5 @@
     Joined: #{@user.created_at.strftime("%m/%d/%Y")}
   .col-md-8
     - if !@comments.empty?
-      = render partial: 'comments/comment', collection: @comments.sort_by{ |c| c.created_at }.reverse, as: :comment
+      = render partial: 'comments/comment', collection: @comments, as: :comment
+      = will_paginate @comments
