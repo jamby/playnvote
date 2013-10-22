@@ -2,7 +2,6 @@ class GamesController < ApplicationController
   # respond :html, :json
   
   def index
-    # @games = Game.find(:all, select: 'id, title')
     @games = Hash[Game.pluck(:id).zip(Game.pluck(:title))]
     respond_to do |format|
       format.html
