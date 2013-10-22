@@ -6,8 +6,8 @@ $(document).ready(function() {
 				var objects = [];
 				
 				$.each(data.games, function(i, object) {
-					map[object.title] = object;
-					objects.push(object.title);
+					map[object] = {id: i, title: object};
+					objects.push(object);
 				})
 				process(objects);
 			},

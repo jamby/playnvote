@@ -2,7 +2,8 @@ class GamesController < ApplicationController
   # respond :html, :json
   
   def index
-    @games = Game.find(:all, select: 'id, title')
+    # @games = Game.find(:all, select: 'id, title')
+    @games = Hash[Game.pluck(:id).zip(Game.pluck(:title))]
     respond_to do |format|
       format.html
       format.json { render json: { games: @games } }
@@ -17,7 +18,7 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
     
     # This is the auto-complete
-    @games = Game.find(:all, select: 'id, title', conditions: ["id != ?", @game.id])
+    @games = Hash[Game.where("id != ?", @game.id).pluck(:id).zip(Game.where("id != ?", @game.id).pluck(:title))]
 
     @relatedGames = RelatedGame.where(game1_id: @game.id) + RelatedGame.where(game2_id: @game.id)
     @relatedGames = @relatedGames.sort_by{ |rg| rg.upvotes.size - rg.downvotes.size }.reverse.take(3)
@@ -29,7 +30,7 @@ class GamesController < ApplicationController
     # More auto-complete
     respond_to do |format|
       format.html
-      format.json { render json: {games: @games}}
+      format.json { render json: { games: @games } }
     end
   end
   
