@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131015173948) do
+ActiveRecord::Schema.define(:version => 20131024134925) do
 
   create_table "comments", :force => true do |t|
     t.integer  "commentable_id"
@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(:version => 20131015173948) do
     t.string   "cover_art"
     t.integer  "giant_bomb_id"
     t.text     "developer"
+    t.text     "publisher"
+    t.text     "genre"
   end
 
   create_table "related_games", :force => true do |t|
