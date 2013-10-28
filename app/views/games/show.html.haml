@@ -4,12 +4,16 @@
       %h1
         = @game.title
       %p
-        = @game.developer.join(" | ")
+        Developer: #{@game.developer.join(", ")}
+      %p
+        Publisher: #{@game.publisher.join(", ")}
       %p
         Release Date: #{release_date(@game)}
 
       %p
         = @game.platform.join(" | ")
+      %p
+        = @game.genre.join(" | ")
   .col-md-6
     - if @game.cover_art
       .well
