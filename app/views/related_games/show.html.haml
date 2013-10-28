@@ -5,7 +5,7 @@
         = link_to @game1.title, @game1
       %hr
       %p
-        Release Date: #{@game1.release_date ? @game1.release_date.strftime("%B %-d, %Y") : "No date recorded"}
+        Release Date: #{release_date(@game1)}
       %p
         = @game1.platform.join(" | ")
     
@@ -18,7 +18,7 @@
         = link_to @game2.title, @game2
       %hr
       %p
-        Release Date: #{@game2.release_date ? @game2.release_date.strftime("%B %-d, %Y") : "No date recorded"}
+        Release Date: #{release_date(@game2)}
       %p
         = @game2.platform.join(" | ")
         

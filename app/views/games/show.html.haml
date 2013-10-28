@@ -6,7 +6,7 @@
       %p
         = @game.developer.join(" | ")
       %p
-        Release Date: #{@game.release_date ? @game.release_date.strftime("%B %-d, %Y") : "No date recorded"}
+        Release Date: #{release_date(@game)}
 
       %p
         = @game.platform.join(" | ")
